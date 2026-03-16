@@ -1,0 +1,25 @@
+services:
+
+  shopping-app:
+    build:
+      context: ./shopping-app
+      dockerfile: Dockerfile
+    container_name: shopping-app
+    env_file:
+      - ./shopping-app/.env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - payment-app
+    restart: always
+
+  payment-app:
+    build:
+      context: ./payment-app
+      dockerfile: Dockerfile
+    container_name: payment-app
+    env_file:
+      - ./payment-app/.env
+    ports:
+      - "8081:8081"
+    restart: always
